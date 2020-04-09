@@ -1,0 +1,33 @@
+---
+title: "Lab 6"
+author: Jesse Bragger and Tori Hancheck 
+output: html_notebook
+---
+
+# 1
+```{r}
+#' This function 
+#'
+#'
+#'
+#'
+pgauss<- function(x, mean, var){
+  cdf<-rep(NA, length(x))
+  for(i in 1:length(x)){
+    cdf[i]<-integrate(f=function(x) dnorm(x, mean=mean, sd=sqrt(var)), lower=-Inf, upper=x[i])[[1]]
+  
+  }
+    return(cdf)
+}
+
+```
+
+# 2
+```{r}
+1 - pgauss(3, 1, 2)
+
+1- pnorm(3, mean=1, sd=sqrt(2))
+
+```
+
+
