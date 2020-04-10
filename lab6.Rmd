@@ -1,6 +1,6 @@
 ---
 title: "Lab 6"
-author: Jesse Bragger and Tori Hancheck 
+author: Jesse Bragger and Tori Hancheck and Rob Golebieski
 output: html_notebook
 ---
 
@@ -30,4 +30,37 @@ pgauss<- function(x, mean, var){
 
 ```
 
+# 3
+
+```{r}
+curve(pnorm(x, mean = 5, sd = 10), from = -25, to = 45)
+abline(v=qnorm(0.25, mean = 5, sd =10))
+```
+
+#4
+
+```{r}
+#'
+#'
+#'
+#'
+#'
+#'
+
+qgauss <- function(q, mean = 0, var=1){
+  a.vector <- rep(0, length(q))
+  for(i in 1:length(q)){
+    a <- function(x) pgauss(x, mean, var) - q[i]
+    a.vector[i] <- uniroot(a, c(mean-3*sqrt(var), mean+3*sqrt(var)))[[1]]
+  }
+  return(a.vector)
+}
+```
+
+#5
+
+```{r}
+qgauss(0.25, 5, 100)
+qnorm(0.25, mean=5, sd=10)
+```
 
