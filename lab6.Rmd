@@ -6,11 +6,13 @@ output: html_notebook
 
 # 1
 ```{r}
-#' This function 
-#'
-#'
-#'
-#'
+#' This function calculates the cumulative distribution for a guassian random variable. 
+#' 
+#' @param x The x variable is a vector of all the values being run through the function
+#' @param mean This is the mean of the ditribution
+#' @param var This is the variance of the distribution
+#' 
+#' @return cdf This w ill return the cdf of the normal distribution for a given set of numbers
 pgauss<- function(x, mean, var){
   cdf<-rep(NA, length(x))
   for(i in 1:length(x)){
@@ -23,6 +25,7 @@ pgauss<- function(x, mean, var){
 ```
 
 # 2
+Using the function pguass we found the probablilty that a guassian ranom variable with a mean of one and a variance of 2 excceds the value 3. Using pnorm we were able to get the same result.
 ```{r}
 1 - pgauss(3, 1, 2)
 
