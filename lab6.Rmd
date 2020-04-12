@@ -1,19 +1,26 @@
 ---
 title: "Lab 6"
-author: Jesse Bragger and Tori Hancheck and Rob Golebieski
+author: Jesse Bragger, Tori Hancheck, and Rob Golebieski
 output: html_notebook
 ---
 
-# 1
+# GitHub Repo
+
+https://github.com/s1075803/Lab6
+
+# Part I
+
+## 1
+
 ```{r}
 #' This function calculates the cumulative distribution for a guassian random variable. 
 #' 
 #' @param x The x variable is a vector of all the values being run through the function
-#' @param mean This is the mean of the ditribution
+#' @param mean This is the mean of the distribution
 #' @param var This is the variance of the distribution
 #' 
 #' @return cdf This w ill return the cdf of the normal distribution for a given set of numbers
-pgauss<- function(x, mean, var){
+pgauss<- function(x, mean = 0, var = 1){
   cdf<-rep(NA, length(x))
   for(i in 1:length(x)){
     cdf[i]<-integrate(f=function(x) dnorm(x, mean=mean, sd=sqrt(var)), lower=-Inf, upper=x[i])[[1]]
@@ -24,23 +31,26 @@ pgauss<- function(x, mean, var){
 
 ```
 
-# 2
-Using the function pguass we found the probablilty that a guassian ranom variable with a mean of one and a variance of 2 excceds the value 3. Using pnorm we were able to get the same result.
-```{r}
-1 - pgauss(3, 1, 2)
+## 2
 
-1- pnorm(3, mean=1, sd=sqrt(2))
-
-```
-
-# 3
+Using the function pgauss we found that the probability of a gaussian random variable with a mean of 1 and a variance of 2 exceeding the value 3 is 0.0786. Using pnorm, we were able to get the same result.
 
 ```{r}
-curve(pnorm(x, mean = 5, sd = 10), from = -25, to = 45)
-abline(v=qnorm(0.25, mean = 5, sd =10))
-```
+1 - pgauss(3, 1, 2) # Find probability
 
-#4
+1- pnorm(3, mean=1, sd=sqrt(2)) # Check answer
+```
+# Part II
+
+## 3
+
+```{r}
+curve(pnorm(x, mean = 5, sd = 10), from = -25, to = 45) # Plot CDF
+abline(v=qnorm(0.25, mean = 5, sd =10)) # Add vertical line
+```
+The 0.25 quantile of the distribution is -2 graphically.
+
+## 4
 
 ```{r}
 #'
@@ -60,10 +70,68 @@ qgauss <- function(q, mean = 0, var=1){
 }
 ```
 
-#5
+## 5
 
 ```{r}
 qgauss(0.25, 5, 100)
 qnorm(0.25, mean=5, sd=10)
 ```
+The 0.25 quantile of a Gaussian random variable with mean \(\mu = 5\) and variance \(\sigma^2 = 100\) is -1.745. We get the same answer using qnorm(). This answer matches the graphical solution found in Problem 3.
+
+# Part III
+
+## 6
+
+```{r}
+#' Compute the log-likelihood function for a Gaussian random sample
+#'
+#' @param mean the presumed mean (mu)
+#' @param var for the assumed variance (sigma^2)
+#' @param data a vector containing the sample (x1,x1,...xn)
+#' @return the value of the log-likelihood function for the sample
+
+gaussian.ll <- function(mean, var, data) {
+  n <- length(data)
+  
+  sum <- 0
+  
+  for (i in 1:n) {
+    sum <- sum + (data[i] - mean)^2
+  }
+  
+  log.likelihood <- (-n/2)*log(2*pi*var) - (1/(2*var))*sum
+  
+  return(log.likelihood)
+}
+
+gaussian.ll(mean = 0, var = 1, data = c(1, 2, 3, 4, 5)) # Check to make sure function works
+
+log.l <- (-5/2)*log(2*pi) - (1/2)*(1 + 4 + 9 + 16 + 25)
+
+log.l # Same answer so the function runs and gives correct output
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
