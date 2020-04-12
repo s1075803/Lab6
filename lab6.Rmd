@@ -1,0 +1,69 @@
+---
+title: "Lab 6"
+author: Jesse Bragger and Tori Hancheck and Rob Golebieski
+output: html_notebook
+---
+
+# 1
+```{r}
+#' This function calculates the cumulative distribution for a guassian random variable. 
+#' 
+#' @param x The x variable is a vector of all the values being run through the function
+#' @param mean This is the mean of the ditribution
+#' @param var This is the variance of the distribution
+#' 
+#' @return cdf This w ill return the cdf of the normal distribution for a given set of numbers
+pgauss<- function(x, mean, var){
+  cdf<-rep(NA, length(x))
+  for(i in 1:length(x)){
+    cdf[i]<-integrate(f=function(x) dnorm(x, mean=mean, sd=sqrt(var)), lower=-Inf, upper=x[i])[[1]]
+  
+  }
+    return(cdf)
+}
+
+```
+
+# 2
+Using the function pguass we found the probablilty that a guassian ranom variable with a mean of one and a variance of 2 excceds the value 3. Using pnorm we were able to get the same result.
+```{r}
+1 - pgauss(3, 1, 2)
+
+1- pnorm(3, mean=1, sd=sqrt(2))
+
+```
+
+# 3
+
+```{r}
+curve(pnorm(x, mean = 5, sd = 10), from = -25, to = 45)
+abline(v=qnorm(0.25, mean = 5, sd =10))
+```
+
+#4
+
+```{r}
+#'
+#'
+#'
+#'
+#'
+#'
+
+qgauss <- function(q, mean = 0, var=1){
+  a.vector <- rep(0, length(q))
+  for(i in 1:length(q)){
+    a <- function(x) pgauss(x, mean, var) - q[i]
+    a.vector[i] <- uniroot(a, c(mean-3*sqrt(var), mean+3*sqrt(var)))[[1]]
+  }
+  return(a.vector)
+}
+```
+
+#5
+
+```{r}
+qgauss(0.25, 5, 100)
+qnorm(0.25, mean=5, sd=10)
+```
+
