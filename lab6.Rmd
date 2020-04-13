@@ -53,12 +53,12 @@ The 0.25 quantile of the distribution is -2 graphically.
 ## 4
 
 ```{r}
+#' This function will compute the quantile function for a Gaussian random variable
+#' 
+#' @param mean this is the mean of the distribution
+#' @param var this is the variance of the distribution
 #'
-#'
-#'
-#'
-#'
-#'
+#' @return a.vector this will return the quantile function evaluated at all of the values in q
 
 qgauss <- function(q, mean = 0, var=1){
   a.vector <- rep(0, length(q))
