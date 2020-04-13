@@ -173,7 +173,18 @@ seq(from = -5, to = 5, by = 10/100)[52] # From the plot, approx the 52nd element
 
 The approximate value of the mean that maximizes the log-likelihood function is 0.10. This makes sense given how we generated the sample using rnorm() with a mean of 0. 0.1 is roughly 0.
 
+# 9
+By using the optimize function, The MLE for the function is 0.1088. This function can find the max or min by setting them to TRUE. 
+```{r}
+optimize(f=gaussian.ll.v, var=1, data=x, interval=c(-5, 5), maximum=TRUE)
+mean(x)
+```
 
+# 10
+The mean if x is equal to 0.1088 which is the same as number 9. The MLE for the population mean of a normal random sample is the sample mean. 
+```{r}
+mean(x)
+```
 
 
 
